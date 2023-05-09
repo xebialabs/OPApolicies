@@ -1,0 +1,18 @@
+package appprotection
+
+
+deny["Must Contain All Required Guards"] {
+  not allow
+}
+
+allow {
+	input.ProtectionSuccessful == true
+	contains(input.EnabledGuardTypes,"Renaming")
+	contains(input.EnabledGuardTypes,"Log statements stripping")
+	contains(input.EnabledGuardTypes,"API Protection")
+	contains(input.EnabledGuardTypes,"Root Detection")
+}
+
+contains(guard, elem) {
+  guard[_] = elem
+}
